@@ -12,8 +12,10 @@ class Category(models.Model):
         verbose_name = 'Категория'
         verbose_name_plural = 'Категории'
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+    def __init__(self, *args, **kwargs): # Конструктор, наследующийся от родительского класса.
+        super().__init__(*args, **kwargs) # Супер - наследование от родительского класса
+        # селф - обьект сам на себя. аргс - множество переменных, что передаются в функцию и возвращаются в видде кортежа
+        # кваргс - именованные переменные возвращаемые в виде словаря.
 
     def __str__(self):
         return self.name
