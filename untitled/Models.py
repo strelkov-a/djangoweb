@@ -1,11 +1,11 @@
 from django.db import models
 from django.core.urlresolvers import reverse
-
+from validators import name_and_slug_validator
 
 # Модель категории
 class Category(models.Model):
-    name = models.CharField(max_length=200, db_index=True, verbose_name='Имя')
-    slug = models.SlugField(max_length=200, db_index=True, unique=True)
+    name = models.CharField(max_length=200, db_index=True, verbose_name='Имя', validators=[name_and_slug_validator()])
+    slug = models.SlugField(max_length=200, db_index=True, unique=True, validators=[name_and_slug_validator()])
 
     class Meta:
         ordering = ['name']
@@ -27,8 +27,8 @@ class Category(models.Model):
 # Модель продукта
 class Product(models.Model):
     category = models.ForeignKey(Category, related_name='products', verbose_name="Категория")
-    name = models.CharField(max_length=200, db_index=True, verbose_name="Название")
-    slug = models.SlugField(max_length=200, db_index=True)
+    name = models.CharField(max_length=200, db_index=True, verbose_name="Название", validators=[name_and_slug_validator()])
+    slug = models.SlugField(max_length=200, db_index=True, validators=[name_and_slug_validator()])
     image = models.ImageField(upload_to='products/%Y/%m/%d/', blank=True, verbose_name="Изображение товара")
     description = models.TextField(blank=True, verbose_name="Описание")
     interface = models.CharField(max_length=30, db_index=True, verbose_name="Интерфейс")
