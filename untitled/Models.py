@@ -1,11 +1,11 @@
 from django.db import models
 from django.core.urlresolvers import reverse
-from validators import name_and_slug_validator
-from validators import interf_capacity_validator
+from .my_validators import name_and_slug_validator
+from .my_validators import interf_capacity_validator
 
 # Модель категории
 class Category(models.Model):
-    name = models.CharField(max_length=200, db_index=True, verbose_name='Имя', validators=[name_and_slug_validator()])
+    name = models.CharField(max_length=200, db_index=True, verbose_name='Имя', validators=[interf_capacity_validator()])
     slug = models.SlugField(max_length=200, db_index=True, unique=True, validators=[name_and_slug_validator()])
 
     class Meta:
